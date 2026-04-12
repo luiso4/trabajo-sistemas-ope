@@ -39,7 +39,7 @@ inline double simularFIFO(vector<Tarea> lista, string nombre, ofstream &reporte)
         int idx = -1;
         for (int i = 0; i < n; i++) {
             if (!listo[i] && lista[i].ti <= reloj) {
-                if (idx == -1 || lista[i].ti < lista[idx].ti) {
+                if (idx == -1 ) {
                     idx = i;
                 }
             }
@@ -50,7 +50,7 @@ inline double simularFIFO(vector<Tarea> lista, string nombre, ofstream &reporte)
         reloj += lista[idx].t; 
         lista[idx].tf = reloj;
         lista[idx].T = lista[idx].tf - lista[idx].ti;
-        lista[idx].E = (long long)lista[idx].T * lista[idx].t;
+        lista[idx].E = (long long)lista[idx].T - lista[idx].t;
         lista[idx].I = (double)lista[idx].t / lista[idx].T;
 
         sumaT += lista[idx].T; sumaE += lista[idx].E; sumaI += lista[idx].I;
@@ -71,9 +71,9 @@ inline double simularLIFO(vector<Tarea> lista, string nombre, ofstream &reporte)
 
     while (finalizados < n) {
         int idx = -1;
-        for (int i = 0; i < n; i++) {
+        for (int i = n - 1; i >= 0; i--) {
             if (!listo[i] && lista[i].ti <= reloj) {
-                if (idx == -1 || lista[i].ti > lista[idx].ti) {
+                if (idx == -1 ) {
                     idx = i;
                 }
             }
@@ -84,7 +84,7 @@ inline double simularLIFO(vector<Tarea> lista, string nombre, ofstream &reporte)
         reloj += lista[idx].t; 
         lista[idx].tf = reloj;
         lista[idx].T = lista[idx].tf - lista[idx].ti;
-        lista[idx].E = (long long)lista[idx].T * lista[idx].t;
+        lista[idx].E = (long long)lista[idx].T - lista[idx].t;
         lista[idx].I = (double)lista[idx].t / lista[idx].T;
 
         sumaT += lista[idx].T; sumaE += lista[idx].E; sumaI += lista[idx].I;
